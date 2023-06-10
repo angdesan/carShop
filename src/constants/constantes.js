@@ -1,3 +1,4 @@
+ import { FormCard } from "../components/forms/FormCard";
  export const menu = [
     {
         id: '1',
@@ -38,7 +39,7 @@
     }
  ]
  export const tabs = [
-  { title: "Tab 1", component: <div>Contenido del Tab 1</div> },
-  { title: "Tab 2", component: <div>Contenido del Tab 2</div> },
-  { title: "Tab 3", component: <div>Contenido del Tab 3</div> },
+  { title: "Datos Cliente", component: <FormCard/> },
+  { title: "Datos Vehículo", component: <div>Contenido del Datos Vehículo</div> },
+  { title: "Servicios", component: <div>Contenido del Servicios</div> },
 ];

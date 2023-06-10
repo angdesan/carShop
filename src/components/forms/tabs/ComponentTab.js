@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Tab } from "./Tab";
 import {tabs} from '../../../constants/constantes'
+import { MyForm } from "../MyForm";
+import { FormCard } from "../FormCard";
 const ComponentTab = () => {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -21,7 +23,12 @@ const ComponentTab = () => {
           />
         ))}
       </div>
-      <div>{tabs[activeTab].component}</div>
+      <div>
+        {activeTab==0 && (tabs[activeTab].component)}
+        {activeTab==1 && (tabs[activeTab].component)}
+        {activeTab==2 && (tabs[activeTab].component)}
+        
+      </div>
       {activeTab < tabs.length - 1 && (
         <button
           className="bg-blue-500 text-white py-2 px-4 rounded mt-4"
@@ -33,5 +40,5 @@ const ComponentTab = () => {
     </div>
   );
 };
-
+{/* <div>{tabs[activeTab].component}</div> */}
 export default ComponentTab;

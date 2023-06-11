@@ -43,3 +43,9 @@
   { title: "Datos Vehículo", component: <div>Contenido del Datos Vehículo</div> },
   { title: "Servicios", component: <div>Contenido del Servicios</div> },
 ];
+export const steps = [
+    'Información del cliente',
+    'Información del vehículo',
+    'Servicios',
+    'Fin de compra'
+]

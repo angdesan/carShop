@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
-import { StepperContext } from '../../contexts/StepperContext'
+import { useFormContext } from '../../contexts/FormContextProvider'
+
 export const StepperControl = ({handleClick,currentStep, steps}) => {
+  const {userData, setUserData,errors, setErrors } = useFormContext();
   return (
     <div className='container flex justify-around mt-4 mb-8'>
         <button 
@@ -13,7 +15,7 @@ export const StepperControl = ({handleClick,currentStep, steps}) => {
         
 
         <button
-        onClick={()=> handleClick("next")}
+        onClick={()=> handleClick("next",errors, userData)}
         className='bg-green-500 text-white uppercase py-2 px-4 rounded-xl 
         font-semibold cursor-pointer hover:bg-slate-700  
         hover:text-white transition duration-200 ease-in-out '>

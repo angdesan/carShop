@@ -49,3 +49,11 @@ export const steps = [
     'Servicios',
     'Fin de compra'
 ]
+export const services = [
+    'Cambio de aceite',
+    'Cambio de frenos',
+    'Alineación y balanceo',
+    'Diagnóstico general',
+    'Revisión de sistema eléctrico',
+    'Revisión de la suspensión',
+]

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useFormContext } from '../../contexts/FormContextProvider'
+import { useFormContext } from '../../../contexts/FormContextProvider'
 
 export const StepperControl = ({handleClick,currentStep, steps}) => {
   const {userData, setUserData,errors, setErrors } = useFormContext();

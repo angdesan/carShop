@@ -1,4 +1,3 @@
- import { FormCard } from "../components/forms/FormCard";
  export const menu = [
     {
         id: '1',
@@ -17,7 +16,7 @@
         }
     },{
         id: '3',
-        name: 'Profile',
+        name: 'Ver Orden',
         svg:{
             class: 'flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white',
             path_d1: 'M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z'
@@ -38,11 +37,7 @@
         name: 'Servicios'
     }
  ]
- export const tabs = [
-  { title: "Datos Cliente", component: <FormCard/> },
-  { title: "Datos Vehículo", component: <div>Contenido del Datos Vehículo</div> },
-  { title: "Servicios", component: <div>Contenido del Servicios</div> },
-];
+
 export const steps = [
     'Información del cliente',
     'Información del vehículo',

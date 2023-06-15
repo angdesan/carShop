@@ -1,13 +1,19 @@
-import React from 'react'
+import React, {useRef, useEffect} from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { useFormContext } from '../../../contexts/FormContextProvider';
+import { useFormContext } from '../../contexts/FormContextProvider';
 
 export default function Cliente() {
   const { userData, setUserData, errors, setErrors } = useFormContext();
+  const firstFieldRef = useRef(null);
   const handleChange = (e) => {
     const {name, value } = e.target;
     setUserData({...userData, [name]:value});
   }
+  useEffect(() => {
+    if (firstFieldRef.current) {
+      firstFieldRef.current.focus();
+    }
+  }, []);
   const initialValues = {
     nombreCliente: userData['nombreCliente']?userData['nombreCliente']: '',
     email: userData['email']? userData['email']: '',
@@ -55,7 +61,7 @@ const validationForm = (values)=>{
                 <div className="mb-4 grid grid-cols-2 gap-4">
                     <div className='grid grid-rows-2'>        
                         <label htmlFor='nameOfClient' className=" font-bold">Nombre del cliente: <span className="text-red-500">*</span></label>
-                        <Field type="text" id="nombreCliente" name="nombreCliente" className="w-full px-3 pb-2 border rounded" onChange={(e)=>{
+                        <Field type="text" id="nombreCliente" innerRef={firstFieldRef} name="nombreCliente" className="w-full px-3 pb-2 border rounded" onChange={(e)=>{
                           formikProps.handleChange(e);
                           setUserData({ ...userData, [e.target.name]: e.target.value });
                         }}/>

@@ -1,9 +1,10 @@
-import React from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { useFormContext } from '../../../contexts/FormContextProvider';
+import React,  {useRef, useEffect} from 'react'
+import { Formik, Field, ErrorMessage } from 'formik'
+import { useFormContext } from '../../contexts/FormContextProvider';
 
 export default function Vehiculo() {
   const { userData, setUserData, errors, setErrors } = useFormContext();
+  const firstFieldRef = useRef(null);
   const initialValues = {
     marca: userData['marca']? userData['marca']: '',
     modelo: userData['modelo']? userData['modelo']: '',
@@ -11,6 +12,11 @@ export default function Vehiculo() {
     nivTanqGas: userData['nivelTanqueGasolina']?userData['nivelTanqueGasolina']: '',
     detallesVehiculo: userData['detallesVehiculo']?userData['detallesVehiculo']:''
   }
+  useEffect(() => {
+    if (firstFieldRef.current) {
+      firstFieldRef.current.focus();
+    }
+  }, []);
   const handleSubmit = (values) =>{
     console.log(values)
     
@@ -47,7 +53,7 @@ export default function Vehiculo() {
           <div className="mb-4 grid grid-cols-2 gap-4">
             <div className='grid grid-rows-2'>
               <label htmlFor='marca' className=" font-bold">Marca del vehículo: <span className="text-red-500">*</span></label>
-              <Field type="text" id="marca" name="marca" className="w-full px-3 pb-2 border rounded" onChange={(e) => {
+              <Field type="text" id="marca" name="marca" innerRef={firstFieldRef} className="w-full px-3 pb-2 border rounded" onChange={(e) => {
                 formikProps.handleChange(e);
                 setUserData({ ...userData, [e.target.name]: e.target.value });
               }} />

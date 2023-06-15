@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { useFormContext } from '../../../contexts/FormContextProvider';
-import { services } from '../../../constants/constantes';
+import { useFormContext } from '../../contexts/FormContextProvider';
+import { services } from '../../constants/constantes';
 
 export default function Servicios() {
   const { userData, setUserData, errors, setErrors } = useFormContext();

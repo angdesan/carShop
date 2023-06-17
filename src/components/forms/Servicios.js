@@ -1,10 +1,10 @@
 import React from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Field } from 'formik'
 import { useFormContext } from '../../contexts/FormContextProvider';
 import { services } from '../../constants/constantes';
 
 export default function Servicios() {
-  const { userData, setUserData, errors, setErrors } = useFormContext();
+  const { userData, setUserData } = useFormContext();
   const handleSubmit = (values) =>{
     console.log(values)
   }
@@ -26,7 +26,13 @@ export default function Servicios() {
               {services.map((s)=>(
                 <div className='grid grid-rows-2' key={s}>
                   <label htmlFor={s} className='font-semibold'>
-                    <Field type='checkbox' name='checked' value={s} className='m-1' style={{width: "20px",height: "20px"} }/>
+                    <Field type='checkbox' name='checked' value={s} 
+                    className='m-1' style={{width: "20px",height: "20px"} }
+                    onChange={(e)=>{
+                      formikProps.handleChange(e);
+                      console.log(e)
+                      setUserData({...userData, [e.target.value]:e.target.value})
+                    }}/>
                     {s}
                   </label>
                 </div>

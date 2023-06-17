@@ -1,6 +1,8 @@
 import React from 'react'
-
+import { useFormContext } from '../../contexts/FormContextProvider'
 export function FinalStep() {
+    const {userData, setUserData} = useFormContext();
+    console.log("Form finalizado: ",userData);
   return (
     <div className='container md:mt-10'>
         <div className='flex flex-col items-center'>

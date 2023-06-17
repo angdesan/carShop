@@ -34,3 +34,10 @@
     transform: rotate(360deg);
   }
 }
+
+#title {
+  display: flex;
+  align-items: center;
+  margin-left: 50px;
+  font-size: xx-large;
+}

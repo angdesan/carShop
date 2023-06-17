@@ -1,15 +1,16 @@
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/navbar/Navbar';
-import { ContainerWizard } from './components/wizard/ContainerWizard';
+import Dashboard from './components/menu/Dashboard';
+import Profile from './components/menu/Profile';
+import { AgregarOrden } from './components/menu/AgregarOrden';
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-      <div className="p-4 sm:ml-64">
-        <div>
-          <ContainerWizard/>
-        </div>
-      </div>
+      <Routes>
+        <Route path='/' element={<Dashboard/>} />
+        <Route path='/generarOrden'  element={<AgregarOrden/>} />
+        <Route path='/profile' element={<Profile/>}/>
+      </Routes>
     </div>
   );
 }

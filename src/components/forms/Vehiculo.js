@@ -1,6 +1,6 @@
 import React,  {useRef, useEffect} from 'react'
 import { Formik, Field, ErrorMessage } from 'formik'
-import { useFormContext } from '../../contexts/FormContextProvider';
+import { useFormContext } from './../../contexts/FormContextProvider';
 
 export default function Vehiculo() {
   const { userData, setUserData, errors, setErrors } = useFormContext();

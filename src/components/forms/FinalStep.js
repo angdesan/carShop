@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFormContext } from '../../contexts/FormContextProvider'
+import { useFormContext } from './../../contexts/FormContextProvider'
 export function FinalStep() {
     const {userData, setUserData, finalData} = useFormContext();
     console.log("Form finalizado: ",userData);

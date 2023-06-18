@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../navbar/Navbar';
-import { ContainerWizard } from '../wizard/ContainerWizard';
+import Navbar from './../navbar/Navbar';
+import { ContainerWizard } from './../wizard/ContainerWizard';
 
 export const AgregarOrden = () =>{
     return (

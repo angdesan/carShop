@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import { Stepper } from './steppers/Stepper'
 import { StepperControl } from './steppers/StepperControl'
-import Cliente from '../forms/Cliente'
+import Cliente from './../forms/Cliente'
 import Vehiculo from './../forms/Vehiculo'
 import Servicios from './../forms/Servicios'
 import { FinalStep } from './../forms/FinalStep'
-import { FormContextProvider } from '../../contexts/FormContextProvider'
-import { steps } from '../../constants/constantes'
+import { FormContextProvider } from './../../contexts/FormContextProvider'
+import { steps } from './../../constants/constantes'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

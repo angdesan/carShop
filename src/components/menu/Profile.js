@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from '../navbar/Navbar'
-import user from '../../static/img/user.png'
+import Navbar from './../navbar/Navbar'
+import user from './../../images/user.png'
 export default function Profile() {
   return (
     <div>

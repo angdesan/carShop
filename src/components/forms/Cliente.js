@@ -1,7 +1,7 @@
 import React, {useRef, useEffect} from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { useFormContext } from '../../contexts/FormContextProvider';
-import { tipoIdentificacion } from '../../constants/constantes';
+import { useFormContext } from './../../contexts/FormContextProvider';
+import { tipoIdentificacion } from './../../constants/constantes';
 
 export default function Cliente() {
   const { userData, setUserData, errors, setErrors } = useFormContext();

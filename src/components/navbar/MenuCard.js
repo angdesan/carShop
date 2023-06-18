@@ -1,5 +1,5 @@
 import React from 'react';
-import { menu } from '../../constants/constantes';
+import { menu } from './../../constants/constantes';
 import { NavLink, Link } from 'react-router-dom';
 export const MenuCard = () =>{
     return (

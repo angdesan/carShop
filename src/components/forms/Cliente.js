@@ -1,14 +1,12 @@
 import React, {useRef, useEffect} from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useFormContext } from '../../contexts/FormContextProvider';
+import { tipoIdentificacion } from '../../constants/constantes';
 
 export default function Cliente() {
   const { userData, setUserData, errors, setErrors } = useFormContext();
   const firstFieldRef = useRef(null);
-  const handleChange = (e) => {
-    const {name, value } = e.target;
-    setUserData({...userData, [name]:value});
-  }
+
   useEffect(() => {
     if (firstFieldRef.current) {
       firstFieldRef.current.focus();
@@ -17,9 +15,9 @@ export default function Cliente() {
   const initialValues = {
     nombreCliente: userData['nombreCliente']?userData['nombreCliente']: '',
     email: userData['email']? userData['email']: '',
-    numeroContacto: userData['numerContacto']?userData['numerContacto']:'',
+    numeroContacto: userData['numeroContacto']?userData['numeroContacto']:'',
     tipoIdentificacion: userData['tipoIdentificacion']?userData['tipoIdentificacion']: '',
-    identificacion: userData['indetificacion']?userData['indetificacion']:''
+    identificacion: userData['identificacion']?userData['identificacion']:''
 }
 const handleSubmit = (values) =>{
     console.log(values)
@@ -37,13 +35,16 @@ const validationForm = (values)=>{
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
       errors.email = 'Dirección de correo electrónico inválida';
   }
+  if(!values.numeroContacto){
+    errors.numeroContacto = 'El número de contacto es requerido'
+  }else if(!isNaN(values.numerContacto)) errors.numeroContacto = 'El valor ingresado debe ser un número celular válido'
   
   if(!values.tipoIdentificacion){
-      errors.tipoIdentificacion = 'El numero de identificación es requerido'
+      errors.tipoIdentificacion = 'El tipo de indetificación es requerido' 
   }
   
   if(!values.identificacion){
-      errors.identificacion = 'El tipo de indetificación es requerido'
+      errors.identificacion = 'El numero de identificación es requerido'
   }
   setErrors(errors);
   return errors;
@@ -77,11 +78,24 @@ const validationForm = (values)=>{
 
                     </div>
                     <div className='grid grid-rows-2'>
-                        <label htmlFor='tipoIdentificacion' className="font-bold">Tipo de identificación: <span className="text-red-500">*</span></label>
-                        <Field type="text" id="tipoIdentificacion" name="tipoIdentificacion" className="w-full px-3 pb-2 border rounded" onChange={(e)=>{
+                        <label htmlFor='numeroContacto' className="font-bold">Número de contacto: <span className="text-red-500">*</span></label>
+                        <Field type="number" id="numeroContacto" name="numeroContacto" className="w-full px-3 pb-2 border rounded" onChange={(e)=>{
                           formikProps.handleChange(e);
                           setUserData({ ...userData, [e.target.name]: e.target.value });
                         }}/>
+                        <ErrorMessage name="numeroContacto" component="small" className="text-red-500"/>
+
+                    </div>
+                    <div className='grid grid-rows-2'>
+                        <label htmlFor='tipoIdentificacion' className="font-bold">Tipo de identificación: <span className="text-red-500">*</span></label>
+                        <Field as="select" id="tipoIdentificacion" name="tipoIdentificacion" className="w-full px-3 pb-2 border rounded" onChange={(e)=>{
+                          formikProps.handleChange(e);
+                          setUserData({ ...userData, [e.target.name]: e.target.value });
+                        }}>
+                          {tipoIdentificacion?.map((tip)=>(
+                            <option key={tip} value={tip}>{tip}</option>
+                          ))}
+                        </Field>
                         <ErrorMessage name="tipoIdentificacion" component="small" className="text-red-500"/>
 
                     </div>
@@ -94,17 +108,6 @@ const validationForm = (values)=>{
                         <ErrorMessage name="identificacion" component="small" className="text-red-500"/>
                     </div>
                 </div>
-                
-                    
-                {/* <div className='flex justify-end'>
-                    <button type='submit' 
-                    className="bg-slate-500 text-white py-2 px-4 rounded mt-4 hover:bg-slate-700"
-                    onClick={(e)=>{
-                        if(!formikProps.isValidating){
-                            formikProps.handleSubmit(e)
-                        }
-                    }}>Siguiente</button>
-                </div> */}
             </form>
             )}
             

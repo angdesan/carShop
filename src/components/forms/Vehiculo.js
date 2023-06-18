@@ -9,7 +9,7 @@ export default function Vehiculo() {
     marca: userData['marca']? userData['marca']: '',
     modelo: userData['modelo']? userData['modelo']: '',
     placa: userData['placa']?userData['placa']:'',
-    nivTanqGas: userData['nivelTanqueGasolina']?userData['nivelTanqueGasolina']: '',
+    nivTanqGas: userData['nivTanqGas']?userData['nivTanqGas']: '',
     detallesVehiculo: userData['detallesVehiculo']?userData['detallesVehiculo']:''
   }
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function Vehiculo() {
               <label htmlFor='placa' className="font-bold">Placa del vehículo: <span className="text-red-500">*</span></label>
               <Field type="text" id="placa" name="placa" className="w-full px-3 pb-2 border rounded" onChange={(e) => {
                 formikProps.handleChange(e);
-                setUserData({ ...userData, [e.target.name]: e.target.value });
+                setUserData({ ...userData, [e.target.name]: e.target.value.toUpperCase() });
               }} />
               <ErrorMessage name="placa" component="small" className="text-red-500" />
 
@@ -82,7 +82,7 @@ export default function Vehiculo() {
               <Field type="text" id="nivTanqGas" name="nivTanqGas" className="w-full px-3 pb-2 border rounded" onChange={(e) => {
                 formikProps.handleChange(e);
                 setUserData({ ...userData, [e.target.name]: e.target.value });
-              }} />
+              }} placeholder="cantidad en galones"/>
               <ErrorMessage name="nivTanqGas" component="small" className="text-red-500" />
             </div>
             <div className='grid grid-rows-2'>

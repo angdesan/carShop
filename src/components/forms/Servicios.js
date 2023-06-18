@@ -4,7 +4,7 @@ import { useFormContext } from '../../contexts/FormContextProvider';
 import { services } from '../../constants/constantes';
 
 export default function Servicios() {
-  const { userData, setUserData } = useFormContext();
+  const { userData, setUserData, setFinalData} = useFormContext();
   const handleSubmit = (values) =>{
     console.log(values)
   }
@@ -31,7 +31,7 @@ export default function Servicios() {
                     onChange={(e)=>{
                       formikProps.handleChange(e);
                       console.log(e)
-                      setUserData({...userData, [e.target.value]:e.target.value})
+                      setFinalData((prevData)=>([...prevData,e.target.value]))
                     }}/>
                     {s}
                   </label>

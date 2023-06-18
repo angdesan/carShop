@@ -35,7 +35,7 @@ export function ContainerWizard() {
     const handleClick = (direction, errors)=>{
         let newStep = currentStep;
         direction==="next"?newStep++: newStep--;
-        errors && Object.keys(errors).length>0 && toast.error('Debe Completar los campos requeridos');
+        errors && Object.keys(errors).length>0 && toast.error('Debe completar los campos requeridos');
         newStep >0 && newStep<= steps.length && errors && Object.keys(errors).length==0 && setCurrentStep(newStep);
         newStep >0 && newStep<= steps.length && direction!="next" && setCurrentStep(newStep);
     }

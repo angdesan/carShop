@@ -18,7 +18,7 @@
         to: '/generarOrden'
     },{
         id: '3',
-        name: 'Ver Orden',
+        name: 'Perfil usuario',
         svg:{
             class: 'flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white',
             path_d1: 'M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z'
@@ -54,4 +54,9 @@ export const services = [
     'Diagnóstico general',
     'Revisión de sistema eléctrico',
     'Revisión de la suspensión',
+]
+export const tipoIdentificacion = [
+    'Seleccionar tipo',
+    'Cedula',
+    'RUC'
 ]

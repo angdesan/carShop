@@ -2,36 +2,45 @@
 repositorio del proyecto React - Coding Bootcamps ESPOL
 
 # Desarrollo y despliegue
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Primeros pasos utilizando Create React App
 
-### Pasos previos de ejecución
+Este proyecto fue iniciado con [Create React App](https://github.com/facebook/create-react-app).
+
+### Paso previo de ejecución
 
 Antes de ejecutar debe instalar las librerías ubicadas en el package.json ejecutando el comando `npm install`
-## Available Scripts
 
-In the project directory, you can run:
+## Scripts disponibles
+
+El el directorio delproyecto, usted puede ejecutar:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Ejeccutar el proyecto en modo desarrollador.\
+Abrir [http://localhost:3000](http://localhost:3000) para visualizar en el navegador.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+La página se volverá a cargar cuando realice cambios.\
+También puede ver los lint errors en la consola.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Construye la aplicación para producción en la carpeta `build`.\
+Empaqueta correctamente React en modo de producción y optimiza la compilación para obtener el mejor rendimiento.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+La compilación se minimiza y los nombres de archivo incluyen los hashes.\
+¡Tu aplicación está lista para ser implementada!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
 
 ### Deployment
 
 Para desplegar el proyecto a nivel local debe instalar la libreria serve.\
-Ejecutando el comando `npm install serve` y luego ejecutar serve -s build
+Ejecutando el comando `npm install serve` y luego ejecutar `serve -s build`.\
+Adicionalmente el proyecto se encuentra desplegado en AWS S3 accediendo al siguiente link: [http://react-project-bootcamp-carshop.s3-website-us-east-1.amazonaws.com/], sin embargo para realizar la prueba se debe iniciar AWS Learned Lab para poder visualizar el proyecto. 
+
+# Descripción
+
+Este proyecto consiste en un formulario para generar una orden de trabajo para carShop.\
+Presenta un menú de 3 opciones. La primera opción "Dashboard" muestra una presentación del proyecto y "Profile" el perfil del usuario.\
+Finalmente la opción "Generar orden" tiene un wizard de 3 tabs donde se deben ingresar datos del cliente, vehículo, los servicios a utilizar y en el tab final un resumen de la información ingresada.

@@ -1,8 +1,20 @@
 import React from 'react'
 import { useFormContext } from './../../contexts/FormContextProvider'
+import {useOrdenes} from './../../contexts/OrdenTaskContext'
 export function FinalStep() {
     const {userData, setUserData, finalData} = useFormContext();
+    const {ordenes, addOrden} = useOrdenes();
     console.log("Form finalizado: ",userData);
+
+    const handleOnClick = () =>{
+        let data = {
+            ...userData,
+            servicios: finalData
+        }
+        addOrden(data);
+
+
+    }
     return(
         <>
             <div className='mb-4'>
@@ -25,11 +37,11 @@ export function FinalStep() {
             <hr className="my-4 border-gray-400" /> 
             <div>
                 <h2 className='text-lg font-bold mb-2'>Servicios Elegidos</h2>
-                <lu>
+                <ul>
                     {finalData.map((service,index)=>(
                         <li className='mb-2' key={index}><span>{service}</span></li>    
                     ))}
-                </lu>
+                </ul>
             </div>
             <hr className="my-4 border-gray-400" /> 
             <div>
@@ -39,8 +51,8 @@ export function FinalStep() {
                 <a className='mt-10' href='/'>
                     <button className='h-10 px-5 text-green-700 transition-colors
                     duration-150 border border-gray-300 rounded-lg
-                    focus: shadow-out-line hover:bg-green-500 hover:text-green-100'>
-                        Close
+                    focus: shadow-out-line hover:bg-green-500 hover:text-green-100' onClick={handleOnClick}>
+                        Guardar
                     </button>
                 </a>
             </div>

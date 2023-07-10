@@ -1,7 +1,12 @@
 import React from 'react'
 import Navbar from './../navbar/Navbar'
 import logo from './../../logo.svg'
+import {useOrdenState} from './../../contexts/OrdenTaskContext'
+import { useAuthState } from '../../contexts/AuthTaskContext'
 export default function Dashboard() {
+  const state = useOrdenState();
+  const state2 = useAuthState();
+  console.log(state2);
   return (
     <div>
         <Navbar/>

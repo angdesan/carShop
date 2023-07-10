@@ -1,8 +1,8 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { initial_orden_task, ordenTaskReducer, TYPES } from './../reducers/ordenTaskReducer'
 import { createOrden, getOrdenes, getOrden, deleteOrden, updateOrden } from './../crud/ordenCrud'
 export const OrdenContext = createContext();
-export const OrdenDispatchContext = createContext();
+const OrdenDispatchContext = createContext();
 
 export function useOrdenState() {
   const context = useContext(OrdenContext);
@@ -20,58 +20,52 @@ export function useOrdenDispatch() {
   return context;
 }
 
-const fetchOrden = async (dispatch) => {
+export const fetchOrden = async (token,user,dispatch) => {
   try {
     dispatch({ type: TYPES.SET_LOADING, payload: true });
-    const ordenes = await getOrdenes();
+    const ordenes = await getOrdenes(token,user);
     if(ordenes){
       dispatch({ type: TYPES.SET_ORDENES, payload: ordenes });
       return ordenes;
-    } else{
-      let errorMessage = response.response.data
-      dispatch({ type: TYPES.SET_ERROR, payload: errorMessage });
-      return errorMessage;
-    }
+    } 
   } catch (error) {
-    dispatch({ type: TYPES.SET_ERROR, payload: error });
+    let errorMessage = error.response.data
+    dispatch({ type: TYPES.SET_ERROR, payload: errorMessage });
+    return errorMessage
   }
 };
 
-const selectOrden = async (dispatch,itemId) => {
+export const selectOrden = async (itemId,token,dispatch) => {
   try {
     dispatch({ type: TYPES.SET_LOADING, payload: true });
-    const orden = await getOrden(itemId);
+    const orden = await getOrden(itemId,token);
     if(orden){
       dispatch({ type: TYPES.SET_SELECTED_ORDEN, payload: orden });
-      return orden;
-    } else{
-      let errorMessage = response.response.data
-      dispatch({ type: TYPES.SET_ERROR, payload: errorMessage });
-      return errorMessage;
+      return {orden:orden, error: null};
     }
   } catch (error) {
-    dispatch({ type: TYPES.SET_ERROR, payload: error.message });
+    let errorMessage = error.response.data
+    dispatch({ type: TYPES.SET_ERROR, payload: errorMessage });
+    return errorMessage
   }
 };
 
-const addOrden = async (dispatch,itemData) => {
+export const addOrden = async (itemData,token,user,dispatch) => {
   try {
     dispatch({ type: TYPES.SET_LOADING, payload: true });
-    const newOrden = await createOrden(itemData);
+    const newOrden = await createOrden(itemData,token,user);
     if(newOrden){
       dispatch({ type: TYPES.ADD_ORDEN, payload: newOrden });
       return newOrden;
-    }else {
-      let errorMessage = response.response.data
-      dispatch({ type: TYPES.SET_ERROR, payload: errorMessage });
-      return errorMessage;
     }
   } catch (error) {
-    dispatch({ type: TYPES.SET_ERROR, payload: error.message });
+    let errorMessage = error.response.data
+    dispatch({ type: TYPES.SET_ERROR, payload: errorMessage });
+    return errorMessage;
   }
 };
 
-const updatedOrden = async (dispatch,itemId, itemData) => {
+export const updatedOrden = async (dispatch,itemId, itemData) => {
   try {
     dispatch({ type: TYPES.SET_LOADING, payload: true });
     const editarOrden = await updateOrden(itemId, itemData);
@@ -79,7 +73,7 @@ const updatedOrden = async (dispatch,itemId, itemData) => {
       dispatch({ type: TYPES.UPDATE_ORDEN, payload: editarOrden });
       return editarOrden;
     }else {
-      let errorMessage = response.response.data
+      let errorMessage = editarOrden.response.data
       dispatch({ type: TYPES.SET_ERROR, payload: errorMessage });
       return errorMessage;
     }
@@ -88,7 +82,7 @@ const updatedOrden = async (dispatch,itemId, itemData) => {
   }
 };
 
-const deletedOrden = async (dispatch,itemId) => {
+export const deletedOrden = async (dispatch,itemId) => {
   try {
     dispatch({ type: TYPES.SET_LOADING, payload: true });
     const eliminarOrden = await deleteOrden(itemId);
@@ -96,7 +90,7 @@ const deletedOrden = async (dispatch,itemId) => {
       dispatch({ type: TYPES.DELETE_ORDEN, payload: itemId });
       return eliminarOrden
     }else {
-      let errorMessage = response.response.data
+      let errorMessage = eliminarOrden.response.data
       dispatch({ type: TYPES.SET_ERROR, payload: errorMessage });
       return errorMessage;
     }
@@ -107,16 +101,11 @@ const deletedOrden = async (dispatch,itemId) => {
 
 export function OrdenTaskProvider({ children }) {
   const [state, dispatch] = useReducer(ordenTaskReducer, initial_orden_task);
-
-  useEffect(() => {
-    fetchOrden()
-  }, []);
-
   return (
     <OrdenContext.Provider value={state}>
-      <OrdenDispatchContext value = {dispatch}>
+      <OrdenDispatchContext.Provider value = {dispatch}>
         {children}
-      </OrdenDispatchContext>
+      </OrdenDispatchContext.Provider>
     </OrdenContext.Provider>
   )
 

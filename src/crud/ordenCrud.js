@@ -1,30 +1,44 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000/api/client/v1/carshop';
+const BASE_URL = 'http://localhost:10000/api/v1/client/carshop';
 
 const api = axios.create({baseURL: BASE_URL});
 
 
-export const getOrdenes = () =>{
-  return  api.get('/ordenes')
+export const getOrdenes = (token, user) =>{
+  return  api.get('/orden', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'user_id': user
+    }
+  })
   .then((res)=>{
     return res.data;
   }).catch((err)=>{
-    return err;
+    throw err;
   })
 }
 
-export const getOrden =  (ordenId) => {
-    return api.get(`/orden/${ordenId}`)
+export const getOrden =  (ordenId,token) => {
+    return api.get(`/orden/${ordenId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
     .then((res)=>{
       return res.data;
     }).catch((err)=>{
-      return err;
+      throw err;
     })
   };
   
-  export const createOrden = (ordenData) => {
-    return api.post('/orden', ordenData)
+  export const createOrden = (ordenData,token,id) => {
+    return api.post('/orden',ordenData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'user_id': id
+      }
+    })
     .then((res)=>{
       return res.data;
     }).catch((err)=>{

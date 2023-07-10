@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'http://localhost:10000/api/client/v1/auth';
+export const BASE_URL = 'http://localhost:10000/api/v1/client/auth';
 
 const api = axios.create({baseURL: BASE_URL});
 
@@ -11,7 +11,7 @@ export const login = async (data) =>{
     .then((res)=>{
         return res.data;
     }).catch((err)=>{
-        return err;
+        throw err;
     })
 }
 

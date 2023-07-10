@@ -1,4 +1,3 @@
-import React from "react"
 import {TYPES_AUTH} from './../constants/types'
 
 //let user = localStorage.getItem("currentUser")? JSON.parse(localStorage.getItem("currentUser")).user: "";
@@ -8,7 +7,7 @@ let token = localStorage.getItem("auth_token")? localStorage.getItem("auth_token
 export const initial_auth_state = {
     user: "" || user,
     token: "" || token,
-    isAuthenticated: false,
+    isAuthenticated: user==="" && token===""? false: true,
     loading: false,
     error: null
 }

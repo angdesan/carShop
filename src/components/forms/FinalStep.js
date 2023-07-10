@@ -1,17 +1,50 @@
 import React from 'react'
 import { useFormContext } from './../../contexts/FormContextProvider'
-import {useOrdenes} from './../../contexts/OrdenTaskContext'
+import {addOrden,useOrdenDispatch} from './../../contexts/OrdenTaskContext'
+import { useAuthState } from '../../contexts/AuthTaskContext';
+import { ToastContainer, toast } from 'react-toastify';
+import {useNavigate} from 'react-router-dom';
+
 export function FinalStep() {
-    const {userData, setUserData, finalData} = useFormContext();
-    const {ordenes, addOrden} = useOrdenes();
+    const {userData, finalData} = useFormContext();
+    const dispatch = useOrdenDispatch();
+    const authState = useAuthState();
+    const navigate = useNavigate();
     console.log("Form finalizado: ",userData);
 
-    const handleOnClick = () =>{
+    const handleOnClick = async () =>{
+        const {nombreCliente, email,numeroContacto,tipoIdentificacion, identificacion} = userData;
+        const {marca,modelo,placa,nivTanqGas,detallesVehiculo} = userData;
+        let cliente = {
+            nombreCliente: nombreCliente,
+            email:email,
+            numeroContacto:numeroContacto,
+            tipoIdentificacion:tipoIdentificacion,
+            identificacion:identificacion
+        }
+        let vehiculo = {
+            marca:marca,
+            modelo:modelo,
+            placa:placa,
+            nivelTanqueGas:nivTanqGas,
+            detalle:detallesVehiculo
+        }
         let data = {
-            ...userData,
+            cliente: cliente,
+            vehiculo: vehiculo,
             servicios: finalData
         }
-        addOrden(data);
+        let response = await addOrden(data,authState.token,authState.user,dispatch);
+        if(response.error!=null){
+            toast.error(response.error);
+        }else{
+            setTimeout(()=>{
+                toast.done("Orden generada con exito");
+            },"2000");
+            navigate('/cargando',{replace: true});
+            
+        }
+
 
 
     }
@@ -48,38 +81,14 @@ export function FinalStep() {
                 <p className='mb-2'><span className='font-semibold'>Fecha y hora estimada de entrega: </span>{new Date().toLocaleString()}</p>
             </div>
             <div className='flex flex-col items-center'>
-                <a className='mt-10' href='/'>
-                    <button className='h-10 px-5 text-green-700 transition-colors
-                    duration-150 border border-gray-300 rounded-lg
-                    focus: shadow-out-line hover:bg-green-500 hover:text-green-100' onClick={handleOnClick}>
-                        Guardar
-                    </button>
-                </a>
+                <button className='h-10 px-5 text-green-700 transition-colors
+                duration-150 border border-gray-300 rounded-lg
+                focus: shadow-out-line hover:bg-green-500 hover:text-green-100' onClick={handleOnClick}>
+                    Guardar
+                </button>
             </div>
+            <ToastContainer />
         </>
         
     )
-//   return (
-//     <div className='container md:mt-10'>
-//         <div className='flex flex-col items-center'>
-//             <div className='text-green-400'>
-//                 {/* imagen */}
-//             </div>
-//             <div className='mt-3 text-xl font-semibold uppercase text-green-500'>
-//                 Felicitaciones!
-//             </div>
-//             <div className='text-lg font-semibold text-gray-500'>
-//                 Ha generado su compra con éxito!
-//             </div>
-//             <a className='mt-10' href='/'>
-//                 <button className='h-10 px-5 text-green-700 transition-colors
-//                 duration-150 border border-gray-300 rounded-lg
-//                 focus: shadow-out-line hover:bg-green-500 hover:text-green-100'>
-//                     Close
-//                 </button>
-//             </a>
-//         </div>
-
-//     </div>
-//   )
 }

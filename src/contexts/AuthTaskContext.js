@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect, } from "react";
+import { createContext, useContext, useReducer } from "react";
 import {initial_auth_state,authReducer} from './../reducers/authTaskReducer'
 import {TYPES_AUTH} from './../constants/types'
 import {login} from './../crud/authRequest'
@@ -34,20 +34,19 @@ export const requestLogin = async (dispatch, data) =>{
             localStorage.setItem('currentUser',login.user);
             localStorage.setItem('auth_token', login.auth_token);
             return response
-        }else {
-            let errorMessage = response.response.data
-            dispatch({ type: TYPES_AUTH.LOGIN_ERROR, error: errorMessage});
-            return errorMessage;    
         }
     }
     catch(err){
-        dispatch({ type: TYPES_AUTH.LOGIN_ERROR, error: err });
+        let errorMessage = err.response.data;
+        dispatch({ type: TYPES_AUTH.LOGIN_ERROR, error: errorMessage.error });
+        return errorMessage;
     }
 }
 export const logout = async(dispatch) =>{
     dispatch({type: TYPES_AUTH.LOGOUT});
-    localStorage.removeItem('CurrentUser');
-    localStorage.removeItem('token');
+    // localStorage.removeItem('CurrentUser');
+    // localStorage.removeItem('token');
+    localStorage.clear();
 }
 
 export const AuthProvider = ({children}) =>{

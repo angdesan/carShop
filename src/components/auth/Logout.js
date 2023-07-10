@@ -6,9 +6,8 @@ export const Logout = () =>{
     const dispatch = useAuthDispatch()
 
     useEffect(()=>{
-        dispatch(logout()).then(()=>{
-            navigate('/', {replace: true});
-        })
+        logout(dispatch);
+        navigate('/', {replace: true});
     }, []);
 
     return ( <div></div>)

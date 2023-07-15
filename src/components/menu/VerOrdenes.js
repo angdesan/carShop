@@ -43,6 +43,7 @@ export default function VerOrdenes() {
                 {ordenesState.ordenes.length>0 && (
                     <div className="grid gap-2 lg:grid-cols-4">
                         {ordenesState.ordenes.map((items, key) => (
+                            items.estadoLogico === 1 &&
                             <div className="w-full rounded-lg shadow-md lg:max-w-sm" key={items._id}>
                                 <img
                                     className="object-cover w-full h-48"

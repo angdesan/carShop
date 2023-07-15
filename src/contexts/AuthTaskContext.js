@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import {initial_auth_state,authReducer} from './../reducers/authTaskReducer'
 import {TYPES_AUTH} from './../constants/types'
-import {login} from './../crud/authRequest'
+import {login,logoutCarshop} from './../crud/authRequest'
 export const AuthContext = createContext();
 const AuthDispatchContext = createContext();
 
@@ -42,11 +42,18 @@ export const requestLogin = async (dispatch, data) =>{
         return errorMessage;
     }
 }
-export const logout = async(dispatch) =>{
-    dispatch({type: TYPES_AUTH.LOGOUT});
-    // localStorage.removeItem('CurrentUser');
-    // localStorage.removeItem('token');
-    localStorage.clear();
+export const logout = async(dispatch, token) =>{
+    try{
+        let response = await logoutCarshop(token);
+        if(response){
+            dispatch({type: TYPES_AUTH.LOGOUT});
+            localStorage.clear();
+        }
+    }catch(error){
+        let errorMessage = error.response.data;
+        dispatch({ type: TYPES_AUTH.LOGIN_ERROR, error: errorMessage.error });
+        return errorMessage;
+    }
 }
 
 export const AuthProvider = ({children}) =>{

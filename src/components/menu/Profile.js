@@ -1,11 +1,12 @@
 import React from 'react'
 import Navbar from './../navbar/Navbar'
 import user from './../../images/user.png'
-import { logout, useAuthDispatch } from '../../contexts/AuthTaskContext'
+import { logout, useAuthDispatch, useAuthState } from '../../contexts/AuthTaskContext'
 export default function Profile() {
   const dispatch = useAuthDispatch();
-  const handleClick = ()=>{
-    logout(dispatch)
+  const state = useAuthState();
+  const handleClick = async ()=>{
+    await logout(dispatch, state.token);
   }
   return (
     <div>

@@ -15,7 +15,6 @@ import VerOrdenes from './components/menu/VerOrdenes';
 
 export default function AppRoute() {
     const state = useAuthState();
-    console.log(state);
   return (
     <OrdenTaskProvider>
         <Routes>

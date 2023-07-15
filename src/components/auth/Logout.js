@@ -7,7 +7,7 @@ export const Logout = () =>{
 
     useEffect(()=>{
         logout(dispatch);
-        navigate('/', {replace: true});
+        //navigate('/', {replace: true});
     }, []);
 
     return ( <div></div>)

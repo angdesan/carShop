@@ -23,14 +23,14 @@ export const loginFields=[
 
 export const signupFields=[
     {
-        labelText:"Username",
-        labelFor:"username",
-        id:"username",
-        name:"username",
+        labelText:"nombre",
+        labelFor:"nombre",
+        id:"nombre",
+        name:"nombre",
         type:"text",
-        autoComplete:"username",
+        autoComplete:"nombre",
         isRequired:true,
-        placeholder:"Username"   
+        placeholder:"nombre"   
     },
     {
         labelText:"Email address",

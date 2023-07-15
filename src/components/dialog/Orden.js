@@ -49,6 +49,12 @@ const OrdenModal = ({ onClose, orden }) => {
                 ))}
             </ul>
         </div>
+        <hr className="my-4 border-gray-400" />
+        <div>
+          <p className='mb-2'><span className='font-semibold'>Estado Orden: </span>{orden[0].estado}</p>
+          {orden[0].motivoCancelacion && <p className='mb-2'><span className='font-semibold'>Motivo de cancelación: </span>{orden[0].motivoCancelacion}</p> }
+          {orden[0].fechaCitaAgendar && !orden[0].motivoCancelacion && <p className='mb-2'><span className='font-semibold'>Fecha de Cita: </span>{new Date(orden[0].fechaCitaAgendar).toLocaleString()}</p> }
+        </div>
         <button
           className="px-4 py-2 mt-4 text-sm text-gray-100 bg-gray-500 rounded shadow"
           onClick={onClose}

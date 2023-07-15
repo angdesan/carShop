@@ -14,4 +14,25 @@ export const login = async (data) =>{
         throw err;
     })
 }
+export const register = async (data) =>{
+    return api.post('/signup',data)
+    .then((res)=>{
+        return res.data;
+    }).catch((err)=>{
+        throw err;
+    })
+}
+
+export const logoutCarshop = async (token) =>{
+    return api.post('/logout',{},{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then((res)=>{
+        return res.data;
+    }).catch((err)=>{
+        throw err;
+    })
+}
 
